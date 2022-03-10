@@ -7,12 +7,20 @@
 </head>
 <body>
 
-<form action="/registration" name="registration" method="post">
+<img src="${pageContext.request.contextPath}/uploads/users/enot.jpg" alt="User image">
+
+<form action="/registration" name="registration" method="post" enctype="multipart/form-data">
     <label for="name">Name: </label>
-    <input type="text" name="name" id="name"/>
+    <input type="text" name="name" id="name" required/>
     <br>
     <label for="birthday">Name: </label>
-    <input type="date" name="birthday" id="birthday"/>
+    <input type="date" name="birthday" id="birthday" required/>
+    <br>
+    <label for="image">Image: </label>
+    <input type="file" name="image" id="image" required>
+    <br>
+    <label for="email">Email: </label>
+    <input type="text" name="email" id="email"/>
     <br>
     <label for="password">Password: </label>
     <input type="password" name="password" id="password"/>
@@ -29,6 +37,15 @@
     </c:forEach>
     <br>
     <button type="submit">Send</button>
+
+    <c:if test="${not empty requestScope.errors}">
+        <div>
+            <c:forEach var="error" items="${requestScope.errors}">
+                <span>${error.message}</span>
+            </c:forEach>
+        </div>
+    </c:if>
+
 </form>
 
 </body>

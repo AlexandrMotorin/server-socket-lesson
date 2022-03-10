@@ -14,7 +14,7 @@ public class CreateUserValidator implements Validator<CreateUserDto>{
         if(!LocalDateFormatter.isValid(userDto.getBirthday())){
             validationResult.add(Error.of("invalid.birthday","Birthday is invalid"));
         }
-        if(Gender.valueOf(userDto.getGender()) == null) {
+        if(userDto.getGender() == null || Gender.valueOf(userDto.getGender()) == null) {
             validationResult.add(Error.of("invalid.gender","GEnder is invalid"));
         }
         return validationResult;
