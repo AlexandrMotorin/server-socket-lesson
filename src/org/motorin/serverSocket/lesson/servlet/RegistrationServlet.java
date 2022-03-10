@@ -1,5 +1,7 @@
 package org.motorin.serverSocket.lesson.servlet;
 
+import org.motorin.serverSocket.lesson.dto.CreateUserDto;
+import org.motorin.serverSocket.lesson.service.UserService;
 import org.motorin.serverSocket.lesson.util.JspHelper;
 
 import javax.servlet.ServletException;
@@ -13,6 +15,8 @@ import java.util.List;
 @WebServlet("/registration")
 public class RegistrationServlet extends HttpServlet {
 
+    private final UserService userService = UserService.getInstance();
+    
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("roles", List.of("USER","ADMIN"));
@@ -22,8 +26,17 @@ public class RegistrationServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        
+        var userDto = CreateUserDto.builder()
+                .name(req.getParameter("name"))
+                .birthday(req.getParameter("birthday"))
+                .email(req.getParameter("email"))
+                .password(req.getParameter("password"))
+                .role(req.getParameter("role"))
+                .gender(req.getParameter("gender"))
+                .build();
 
-        req.getParameter("name");
-
+        userService.create(userDto);
+        resp.sendRedirect("/login");
     }
 }

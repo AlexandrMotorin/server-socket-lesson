@@ -48,6 +48,11 @@ public class FlightDao implements Dao<Long, Flight>{
 
     }
 
+    @Override
+    public Flight save(Flight flight) {
+        return null;
+    }
+
     private Flight buildFlight(ResultSet resultSet) throws SQLException {
         return new Flight(
                 resultSet.getObject("id", Long.class),

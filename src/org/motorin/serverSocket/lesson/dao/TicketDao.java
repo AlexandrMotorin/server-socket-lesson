@@ -72,4 +72,9 @@ public class TicketDao implements Dao<Long, Ticket>{
     public void deleteById(Long id) {
 
     }
+
+    @Override
+    public Ticket save(Ticket ticket) {
+        return null;
+    }
 }
